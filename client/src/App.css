@@ -26,3 +26,25 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/*
+============= LANDING PAGE ==========
+=====================================
+*/
+.landing {
+  position: relative;
+  background: url('./img/landingPic.jpg') no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  margin-top: -24px;
+  margin-bottom: -50px; 
+}
+
+.jumbotronLanding {
+  padding: 4rem 2rem;
+  margin-top: 130px;
+  background-color: #0000ffd9;
+} 
+
+
