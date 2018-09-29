@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Navbar extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
-          <a className="navbar-brand" href="landing.html">
+          <a className="navbar-brand" href="#">
             ETrade
           </a>
           <button
@@ -20,39 +21,25 @@ export default class Navbar extends Component {
             
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <a className="nav-link" href="about.html">
-                  About
-                </a>
+                <Link to="/" className="nav-link">About</Link>
               </li>
             </ul>
 
-             <ul className="navbar-nav ml-auto">
+            <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="Companies.html">
-                  Companies
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="Transactions.html">
-                  Transactions
-                </a>
-              </li>
-
-              <li className="nav-item">
-                <a className="nav-link" href="Portfolio.html">
-                  Portfolio
-                </a>
+                <Link to="/companies" className="nav-link">Companies</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="Sign Up.html">
-                  Sign Up
-                </a>
+                <Link to="/transactions" className="nav-link">Transactions</Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="Login.html">
-                  Login
-                </a>
+                <Link to="/portfolio" className="nav-link">Portfolio</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/register" className="nav-link">Sign Up</Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">Login</Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="Login.html">
