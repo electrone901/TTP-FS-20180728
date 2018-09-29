@@ -1,0 +1,1 @@
+This project contains the `front-end and back-end code` and it was created using iextrading.com to get real price for `Investment Trading Company` Create an investment profile/portfolio, buy, sell and get help from financial experts.
