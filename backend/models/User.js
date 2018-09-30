@@ -17,7 +17,7 @@ const Schema = mongoose.Schema;
         type: Date,
         default: Date.now
     },
-    money: {
+    available_credit: {
         type: Number,
         default: 50000
     }
