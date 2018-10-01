@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import axios from '../../axios-stocks';
 import classnames from 'classnames';
+import { connect } from 'react-redux';
+ import { registerUser } from '../../actions/authActions';
 
-export default class Register extends Component{
+class Register extends Component{
     constructor(){
         super();
         this.state = {
@@ -34,10 +35,8 @@ export default class Register extends Component{
             password: this.state.password,
             password2: this.state.password2
         };
-        
-        axios.post('api/register', newUser)
-        .then(res => console.log(res.data))        
-        .catch(err => this.setState({errors: err.response.data}));
+        console.log('newUser',newUser);
+        this.props.registerUser(newUser);
     }
     
     render(){
@@ -101,5 +100,12 @@ export default class Register extends Component{
                 </div>
             </div>
         );
-    }
+    }    
 }
+
+const mapStateToProps = state => ({
+    auth: state.auth,
+    errors: state.errors
+})
+
+export default connect(mapStateToProps, {registerUser})(Register);
