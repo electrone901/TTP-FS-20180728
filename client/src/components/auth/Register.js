@@ -18,11 +18,18 @@ class Register extends Component{
         this.onSubmit = this.onSubmit.bind(this);
     }
 
-    componentWillReciveProps(nextProps) {
-        if(nextProps.errors) {
+    componentDidMount(){
+      if(this.props.auth.isAuthenticated){
+        this.props.history.push('/portfolio');
+      }
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.errors){
             this.setState({errors: nextProps.errors});
         }
     }
+
     
     onChange(e){
         this.setState({[e.target.name]: e.target.value});
@@ -36,19 +43,19 @@ class Register extends Component{
             password: this.state.password,
             password2: this.state.password2
         };
-        console.log('newUser',newUser);
+        
         this.props.registerUser(newUser, this.props.history);
     }
     
     render(){
         const {errors} = this.state;
         return(
+            
             <div className="register">
                 <div className="container">
                   <div className="row">
                     <div className="col-md-8 m-auto">
                       <h1 className="display-4 text-center">Sign Up</h1>
-                      
                       <form noValidate onSubmit={this.onSubmit}>
                         <div className="form-group">
                           <input type="text"

@@ -43,15 +43,10 @@ class Portfolio extends Component{
                  this.setState({show: false});
              });
     }
-    
-    onLogoutClick(e){
-        e.preventDefault();
-        this.props.logoutUser();
-        this.props.history.push('/');
-    }
-     
+  
     render(){
         const {isAuthenticated} = this.props.auth;
+        const {user} = this.props.auth;
         let stockInfo;
         
         stockInfo = (
@@ -59,17 +54,11 @@ class Portfolio extends Component{
                 <p>{this.state.symbol.symbol} - {this.state.symbol.companyName} - ${this.state.price}</p>
             </div>
         );
-        
-        const authLinks = (
-            <a href="" onClick={this.onLogoutClick.bind(this)} className="nav-link">
-                Logout
-            </a>
-        );
-        
+            
         return(
             <div className="Portfolio">
-                {isAuthenticated ? authLinks : null}
                 <h1 className="text-center">Portfolio</h1>
+                <p className="text-center">You have ${user.money}</p>
                 <form onSubmit={this.onSubmit}>
                     <input
                       type="text"

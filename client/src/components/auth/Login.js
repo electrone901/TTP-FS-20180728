@@ -14,6 +14,13 @@ class Login extends Component{
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
+
+
+    componentDidMount(){
+      if(this.props.auth.isAuthenticated){
+        this.props.history.push('/portfolio');
+      }
+    }
     
     componentWillReceiveProps(nextProps) {
         if(nextProps.auth.isAuthenticated){

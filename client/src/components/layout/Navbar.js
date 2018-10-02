@@ -1,14 +1,54 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
 
-export default class Navbar extends Component {
+
+class Navbar extends Component {
+  
+  onLogoutClick(e){
+      e.preventDefault();
+      this.props.logoutUser();
+  }
+
   render() {
+    const {isAuthenticated, user} = this.props.auth;
+    const authLinks = (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link to="/" className="nav-link">
+              Welcome, {user.name}
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link to="/" onClick={this.onLogoutClick.bind(this)} className="nav-link">
+              Logout
+          </Link>
+        </li>
+      </ul>
+    );
+    
+    const guestLinks = (
+      <ul className="navbar-nav ml-auto">
+        <li className="nav-item">
+          <Link className="nav-link" to="/register">
+            Sign Up
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/login">
+            Login
+          </Link>
+        </li>
+      </ul>
+    );
+
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
-          <a className="navbar-brand" href="#">
-            ETrade
-          </a>
+          <Link className="navbar-brand" to="/">
+            Stock Site
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -17,46 +57,25 @@ export default class Navbar extends Component {
           >
             <span className="navbar-toggler-icon" />
           </button>
-           <div className="collapse navbar-collapse" id="mobile-nav">
-            
+
+          <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to="/" className="nav-link">About</Link>
+                
               </li>
             </ul>
 
-            <ul className="navbar-nav ml-auto">
-              <li className="nav-item">
-                <Link to="/companies" className="nav-link">Companies</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/transactions" className="nav-link">Transactions</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/portfolio" className="nav-link">Portfolio</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/register" className="nav-link">Sign Up</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/login" className="nav-link">Login</Link>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="Login.html">
-                  Logout 
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="profiles.html">
-                  {' '}
-                  UserName
-                </a>
-              </li>
-            </ul>
+            {isAuthenticated ? authLinks : guestLinks}
+            
           </div>
         </div>
       </nav>
-  
     )
   }
 }
+
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+export default connect(mapStateToProps, {logoutUser})(Navbar);
