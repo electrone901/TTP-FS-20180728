@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 
-class Landing extends Component {
+class Home extends Component {
 	render() {
         const {isAuthenticated} = this.props.auth;
 
@@ -50,5 +50,5 @@ const mapStateToProps = (state) => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(Landing); 
+export default connect(mapStateToProps)(Home); 
 

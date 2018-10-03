@@ -4,19 +4,19 @@ import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
 
 import setAuthToken from './utilis/setAuthToken';
-import PrivateRoute from './component/common/PrivateRoute';
+import PrivateRoute from './components/common/PrivateRoute';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 
 import store from './store';
 
-import Navbar from './component/layout/Navbar';
-import Footer from './component/layout/Footer';
-import Home from './component/home/Home';
-import Register from './component/auth/Register';
-import Login from './component/auth/Login';
-import Portfolio from './component/portfolio/Portfolio';
-import Transactions from './component/transactions/Transactions';
-import Stocks from './component/stocks/Stocks';
+import Navbar from './components/layout/Navbar';
+import Footer from './components/layout/Footer';
+import Home from './components/layout/Home';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
+import Portfolio from './components/portfolio/Portfolio';
+import Transactions from './components/transactions/Transactions';
+import Stocks from './components/stocks/Stocks';
 
 if(localStorage.jwtToken){
   setAuthToken(localStorage.jwtToken);
