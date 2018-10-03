@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
- const UserSchema = new Schema({
+
+const UserSchema = new Schema({
     name: {
         type: String,
         required: true
@@ -17,9 +18,10 @@ const Schema = mongoose.Schema;
         type: Date,
         default: Date.now
     },
-    available_credit: {
+    money: {
         type: Number,
         default: 50000
     }
 });
- module.exports = User = mongoose.model('users', UserSchema); 
+
+module.exports = User = mongoose.model('users', UserSchema);
