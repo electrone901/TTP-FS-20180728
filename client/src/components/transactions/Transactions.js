@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { getTransactions } from '../../actions/transactionActions';
+import TransactionsList from './TransactionsList';
 
 class Transactions extends Component{
     componentDidMount(){
@@ -15,16 +16,14 @@ class Transactions extends Component{
         if(transactions === null || loading){
             transactionContent = <p>loading</p>;
         }
+        else{
+            transactionContent = <TransactionsList transactions={transactions} />;
+        }
         
         return(
             <div>
                 <h1>Your Transactions</h1>
-                <div className="row">
-                    <div className="col">
-                        
-                    </div>
-                    {transactionContent}
-                </div>
+                {transactionContent}
             </div>
         );
     }
