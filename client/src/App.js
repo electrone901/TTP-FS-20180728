@@ -1,28 +1,28 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch  } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import jwt_decode from 'jwt-decode';
-import PrivateRoute from './components/common/PrivateRoute';
+
 import setAuthToken from './utilis/setAuthToken';
+import PrivateRoute from './component/common/PrivateRoute';
 import { setCurrentUser, logoutUser } from './actions/authActions';
 
 import store from './store';
 
-import Navbar from './components/layout/Navbar';
-import Landing from './components/layout/Landing';
-import Footer from './components/layout/Footer';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
-import Companies from './components/companies/Companies';
-import Portfolio from './components/portfolio/Portfolio';
-import Transactions from './components/transactions/Transactions';
-import './App.css';
+import Navbar from './component/layout/Navbar';
+import Footer from './component/layout/Footer';
+import Home from './component/home/Home';
+import Register from './component/auth/Register';
+import Login from './component/auth/Login';
+import Portfolio from './component/portfolio/Portfolio';
+import Transactions from './component/transactions/Transactions';
+import Stocks from './component/stocks/Stocks';
 
-if(localStorage.jwtToken) {
+if(localStorage.jwtToken){
   setAuthToken(localStorage.jwtToken);
   const decoded = jwt_decode(localStorage.jwtToken);
   store.dispatch(setCurrentUser(decoded));
-
+  
   const currentTime = Date.now() / 1000;
   
   if(decoded.exp < currentTime){
@@ -31,6 +31,8 @@ if(localStorage.jwtToken) {
   }
 }
 
+
+
 class App extends Component {
   render() {
     return (
@@ -38,14 +40,14 @@ class App extends Component {
         <Router>
           <div className="App">
             <Navbar />
-            <Route exact path="/" component={Landing} />
             <div className="container">
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/" component={Home} />
               <Route exact path="/register" component={Register} />
-              <Route exact path="/companies" component={Companies}/>
+              <Route exact path="/login" component={Login} />
               <Switch>
-                <PrivateRoute exact path="/portfolio" component={Portfolio}/>
-                <PrivateRoute exact path="/transactions" component={Transactions} />
+                 <PrivateRoute exact path="/portfolio" component={Portfolio} />
+                 <PrivateRoute exact path="/transactions" component={Transactions} />
+                 <PrivateRoute exact path="/stocks" component={Stocks} />
               </Switch>
             </div>
             <Footer />

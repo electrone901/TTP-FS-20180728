@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+
 import { logoutUser } from '../../actions/authActions';
 
-
 class Navbar extends Component {
-  
   onLogoutClick(e){
       e.preventDefault();
       this.props.logoutUser();
   }
-
+  
   render() {
     const {isAuthenticated, user} = this.props.auth;
     
@@ -32,9 +31,6 @@ class Navbar extends Component {
     const guestLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link to="/companies" className="nav-link">Companies</Link>
-        </li>
-        <li className="nav-item">
           <Link className="nav-link" to="/register">
             Sign Up
           </Link>
@@ -46,12 +42,9 @@ class Navbar extends Component {
         </li>
       </ul>
     );
-
+    
     const authLinks2 = (
       <ul className="navbar-nav mr-auto">
-        <li className="nav-item">
-          <Link to="/companies" className="nav-link">Companies</Link>
-        </li>
         <li className="nav-item">
           <Link className="nav-link" to="/portfolio">
             {' '}
@@ -64,15 +57,20 @@ class Navbar extends Component {
             Transaction
           </Link>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/stocks">
+            {' '}
+            Stock
+          </Link>
+        </li>
       </ul>
     );
-
-
+    
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
         <div className="container">
           <Link className="navbar-brand" to="/">
-            ETrade
+            Stock Site
           </Link>
           <button
             className="navbar-toggler"
@@ -89,7 +87,7 @@ class Navbar extends Component {
           </div>
         </div>
       </nav>
-    )
+    );
   }
 }
 
