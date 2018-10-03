@@ -47,6 +47,7 @@ class App extends Component {
 
               <Switch>
                 <PrivateRoute exact path="/portfolio" component={Portfolio}/>
+                <PrivateRoute exact path="/transactions" component={Transactions} />
               </Switch>
             </div>
             <Footer />
