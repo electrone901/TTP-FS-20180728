@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { getTransactions } from '../../actions/transactionActions';
 import TransactionsList from './TransactionsList';
+import Spinner from '../common/Spinner';
+import { getTransactions } from '../../actions/transactionActions';
 
 class Transactions extends Component{
     componentDidMount(){
-         this.props.getTransactions();
+         this.props.getTransactions(this.props.auth.user.id);
     }
     
     render(){
@@ -14,7 +15,7 @@ class Transactions extends Component{
         let transactionContent;
         
         if(transactions === null || loading){
-            transactionContent = <p>loading</p>;
+            transactionContent = <Spinner />;
         }
         else{
             transactionContent = <TransactionsList transactions={transactions} />;
