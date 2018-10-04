@@ -7,11 +7,31 @@ import { getStocks } from '../../actions/stockActions';
 
 class Stocks extends Component{
     componentDidMount(){
-         this.props.getStocks();
+         this.props.getStocks(this.props.auth.user.id);
     }
     
     render(){
+
+
+        
+        // let symbol = this.props.stock.symbol;
+
+        // if (obj.hasOwnProperty(symbol)) {
+        //     obj[obj[symbol]]++;
+        // }
+        // else {
+        //    obj[symbol] = 1; 
+        // }
+
+
+
+        
+
+
+
         const {stocks, loading} = this.props.stocks;
+
+        console.log('stocks',stocks)
         let stockContent;
         
         if(stocks === null || loading){
@@ -19,6 +39,60 @@ class Stocks extends Component{
         }
         else{
             stockContent = <StocksList stocks={stocks} />;
+            
+            {   
+                let obj = {};
+
+                // stocks.forEach(function (o) {
+                //     Object.keys(o).forEach(function (k) {
+                //         if(k.symbol) {}
+                //         console.log(k, o[k]); // show key and value
+                //     });
+                // });
+
+                stocks.forEach(function (o) {
+                    Object.keys(o).forEach(function (k) {
+                        // console.log(k, o[k]); // show key and value
+                        // if(k.symbol) {
+                            console.log(k);
+                        // }
+                    });
+                });
+
+
+// stocks.forEach(function (o) {
+//     Object.keys(o).forEach(function (k) {
+//         console.log(k, o[k]); // show key and value
+//     });
+// });
+
+
+// let symbol = k.symbol;
+//                         console.log('symbol',symbol)
+//                         if (obj.hasOwnProperty(symbol)) {
+//                             obj[obj[symbol]] +1;
+//                         }
+//                         else {
+//                             obj[symbol] = 1; 
+//                         }
+
+
+                // for(let i=0; i< stocks.length; i++) {
+                //     let symbol = stocks.symbol;
+                //     console.log('stocks',stocks.symbol)
+
+                //     if (obj.hasOwnProperty(symbol)) {
+                //     obj[obj[symbol]] +1;
+                //     }
+                //     else {
+                //     obj[symbol] = 1; 
+                //     }
+
+                // }
+                
+                // console.log('result obj',obj)
+            }
+
         }
         
         return(

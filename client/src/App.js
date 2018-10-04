@@ -17,6 +17,7 @@ import Login from './components/auth/Login';
 import Portfolio from './components/portfolio/Portfolio';
 import Transactions from './components/transactions/Transactions';
 import Stocks from './components/stocks/Stocks';
+import Companies from './components/companies/Companies';
 
 if(localStorage.jwtToken){
   setAuthToken(localStorage.jwtToken);
@@ -44,6 +45,7 @@ class App extends Component {
               <Route exact path="/" component={Home} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
+              <Route exact path="/companies" component={Companies} />
               <Switch>
                  <PrivateRoute exact path="/portfolio" component={Portfolio} />
                  <PrivateRoute exact path="/transactions" component={Transactions} />
