@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+var request = require('request-promise');
 
 class Companies extends Component{
     
@@ -99,7 +100,6 @@ class Companies extends Component{
             name: ''
         };
         this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
     }
 
     
@@ -114,60 +114,21 @@ class Companies extends Component{
       portfolioList.forEach((obj) => {
         choosen_type_str += obj.symbols;
       })
-      console.log("ALL",choosen_type_str)
 
-      // FETCH STOCK TYPE DATA
-      axios.get(`https://api.iextrading.com/1.0/tops?symbols=`+choosen_type_str)
-      .then(response => {
-        console.log(response.data)
-        this.setState({this_data: response.data})
-      })
-      .catch(error => {
-        console.log(error);
-      })
-    }
-
-
-    onSubmit(e){
-        e.preventDefault();
-
-        const portfolio = [
-          {'name': 'all_stocks', 'symbols': ['SPY', 'DIA', 'QQQ', 'IWM','XLF', 'XLK', 'XLC', 'XLV', 'XLP', 'XLY', 'XLE', 'XLB', 'XLI', 'XLU', 'XLRE',
-              'GS', 'MS', 'JPM', 'WFC', 'C', 'BAC', 'BCS', 'DB', 'CS', 'RBS','AAPL', 'GOOGL', 'MSFT', 'AMZN', 'FB', 'TWTR', 'NFLX', 'SNAP', 'SPOT', 'DBX', 'SQ', 'BABA', 'INTC', 'AMD', 'NVDA', 'ORCL',
-              'BND', 'BIV', 'JNK', 'VOO', 'VTI', 'VGK', 'VPL', 'VWO', 'VDE', 'XOP', 'VFH', 'VHT', 'VIG', 'VYM', 'VAW', 'REM', 'XHB', 'GLD', 'SHV', 'FLOT', 'MJ',
-              'EFC', 'EARN', 'NLY', 'AGNC', 'CIM', 'TWO', 'NRZ','F', 'GM', 'FCAU', 'TM', 'HMC', 'TSLA', 'XOM', 'WMT', 'JNJ', 'GE', 'T', 'KO', 'DIS', 'MCD', 'PG'
-            ]
-          },
-          {'name': 'Market_ETFs', 'symbols': ['SPY', 'DIA', 'QQQ', 'IWM']},
-          {'name': 'Sector_ETFs', 'symbols': ['XLF', 'XLK', 'XLC', 'XLV', 'XLP', 'XLY', 'XLE', 'XLB', 'XLI', 'XLU', 'XLRE']},
-          {'name': 'Banks', 'symbols': ['GS', 'MS', 'JPM', 'WFC', 'C', 'BAC', 'BCS', 'DB', 'CS', 'RBS']},
-          {'name': 'Tech', 'symbols': ['AAPL', 'GOOGL', 'MSFT', 'AMZN', 'FB', 'TWTR', 'NFLX', 'SNAP', 'SPOT', 'DBX', 'SQ', 'BABA', 'INTC', 'AMD', 'NVDA', 'ORCL']},
-          {'name': 'Bond_ETFs', 'symbols': ['BND', 'BIV', 'JNK']},
-          {'name': 'Other_ETFs', 'symbols': ['VOO', 'VTI', 'VGK', 'VPL', 'VWO', 'VDE', 'XOP', 'VFH', 'VHT', 'VIG', 'VYM', 'VAW', 'REM', 'XHB', 'GLD', 'SHV', 'FLOT', 'MJ']},
-          {'name': 'Mortgage_REITs', 'symbols': ['EFC', 'EARN', 'NLY', 'AGNC', 'CIM', 'TWO', 'NRZ']},
-          {'name': 'Autos', 'symbols': ['F', 'GM', 'FCAU', 'TM', 'HMC', 'TSLA']},
-          {'name': 'BigCos', 'symbols': ['XOM', 'WMT', 'JNJ', 'GE', 'T', 'KO', 'DIS', 'MCD', 'PG']}
-        ];
-
-        // let choosen_type = this.state.choosen_type;
-        // let choosen_type_str = '';
-        let choosen_type_str = "SPY,DIA,QQQ,IWM"
-
-     
-
-        axios.get(`https://api.iextrading.com/1.0/tops?symbols=`+choosen_type_str)
-          .then(response => {
-            this.setState({this_data: response.data})
-          })
-          .catch(error => {
-            console.log(error);
-          })
+      request({
+      	"method":"GET", 
+      	"uri": "https://api.iextrading.com/1.0/tops?symbols="+choosen_type_str,
+      	"json": true,
+      	"headers": {
+	    	"User-Agent": "ETRADE"
+	  	}
+	  }).then( response => {
+	  	console.log("my***response",response)
+      	this.setState({this_data: response})
+	  });
 
     }
 
-
-    
-    
      
     onChange(e){
         this.setState({[e.target.name]: e.target.value});
@@ -191,17 +152,19 @@ change = (e) =>{
           choosen_type_str += obj.symbols;
         }
       })
-      console.log("what string", choosen_type_str)
 
-      axios.get(`https://api.iextrading.com/1.0/tops?symbols=`+choosen_type_str)
-      .then(response => {
-        console.log('response', response)
+      request({
+      	"method":"GET", 
+      	"uri": "https://api.iextrading.com/1.0/tops?symbols="+choosen_type_str,
+      	"json": true,
+      	"headers": {
+	    	"User-Agent": "ETRADE"
+	  	}
+	  }).then( response => {
+	  	console.log("my***response",response)
+      	this.setState({this_data: response})
+	  });
 
-        this.setState({this_data: response.data})
-      })
-      .catch(error => {
-        console.log(error);
-      })
 
      }
 
@@ -253,25 +216,10 @@ change = (e) =>{
                 <h1>Companies's Stocks</h1>
               </div>
 
-
-              <div>
-               <select id="lang" onChange={this.change} value={this.state.value}>
-                  <option value="select">Select</option>
-                  <option value="Java">Java</option>
-                  <option value="C++">C++</option>
-               </select>
-               <p></p>
-               <p>{this.state.value}</p>
-           </div>
-
-
-
-
-
               <div className="row">
 
                 <div className="col">
-
+                
                   <div className="row">
                     <div className="col-10" id="dropMenu">
                       <div className="drop">

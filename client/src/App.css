@@ -39,6 +39,7 @@
   height: 100vh;
   margin-top: -24px;
   margin-bottom: -50px; 
+  max-width: 1340px;
 }
 
 .jumbotronLanding {
