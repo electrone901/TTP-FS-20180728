@@ -8,6 +8,8 @@ class TransactionsItem extends Component{
         return(
             <div className="card card bg-light text-dark mb-1 p-2">
                 <div className="row">
+                    
+
                     <div className="col-md-3">
                         <h5 className="d-inline">{transaction.symbol}</h5>
                     </div>
@@ -20,6 +22,8 @@ class TransactionsItem extends Component{
                     <div className="col-md-3">
                         <p className="d-inline">{transaction.date}</p>
                     </div>
+
+
                 </div>
             </div>
         );

@@ -1,59 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 class StocksItem extends Component{
 
 
     render(){
-        // let obj = {};
-        // let symbol = this.props.stock.symbol;
-
-        // if (obj.hasOwnProperty(symbol)) {
-        //     obj[obj[symbol]]++;
-        // }
-        // else {
-        //    obj[symbol] = 1; 
-        // }
-
-
-
-        // console.log('obj',obj)
-
-
-        // console.log('this.props', this.props)
-        // console.log('this.props.quantity', this.props.stock.quantity)
-        // console.log('this.props.symbol', this.props.stock.symbol)
-        // console.log('all obj',obj)
+        
 
         const {stock} = this.props;
+        let currentPrice = stock.price
+        let averagePrice = stock.price / stock.quantity;
+        let performance;
         
+        if(averagePrice == currentPrice) {
+            performance = 0;
+        }
+
+        if(averagePrice < currentPrice) {
+            let increaseValue = currentPrice - averagePrice;
+            performance = (increaseValue / averagePrice) * 100;
+        }
+
+        else {
+            let decreaseValue = averagePrice - currentPrice;
+            performance = (decreaseValue / decreaseValue) * -100;
+        }
+        
+        if(isNaN(performance)) {
+            performance=0;
+        }
         
         return(
-            <div className="card card bg-light text-dark mb-1 p-2">
-                <div className="row">
-                    
-                    <div className="col-md-2">
-                        <h5 className="d-inline">{stock.symbol}</h5>
-                    </div>
-                   
-                    <div className="col-md-2">
-                        <p className="d-inline">Stocks - {stock.quantity}</p>
-                    </div>
-
-                    <div className="col-md-2">
-                        <h5 className="d-inline">avg {stock.symbol}</h5>
-                    </div>
-
-                    <div className="col-md-2">
-                        <h5 className="d-inline">currentPrice: {stock.symbol}</h5>
-                    </div>
-
-                    <div className="col-md-2">
-                        <h5 className="d-inline">Performace {stock.symbol}</h5>
-                    </div>
-
-                </div>
-            </div>
+            <tr scope="row">
+                <td>{stock.symbol}</td>
+                <td>{stock.quantity}</td>
+                <td>{averagePrice}</td>
+                <td style={{color:'red'}}>{stock.price}</td>
+                <td>{performance}%</td>
+            </tr>
         );
     }
 }

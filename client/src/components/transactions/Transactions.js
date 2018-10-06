@@ -18,7 +18,7 @@ class Transactions extends Component{
             transactionContent = <Spinner />;
         }
         else{
-            transactionContent = <TransactionsList transactions={transactions} />;
+            transactionContent = <TransactionsList transactions={transactions} />;              
         }
         
         return(

@@ -1,145 +1,60 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import StocksList from './StocksList';
+import StocksList from './StocksList'
 import Spinner from '../common/Spinner';
-import { getStocks } from '../../actions/stockActions';
+import { getTransactions } from '../../actions/transactionActions';
 
 class Stocks extends Component{
     componentDidMount(){
-         this.props.getStocks(this.props.auth.user.id);
+         this.props.getTransactions(this.props.auth.user.id);
     }
     
     render(){
-
-
+        const {transactions, loading} = this.props.transactions;
+        let dictionary = {};
+        let transactionContent;
+        let result = [];
         
-        // let symbol = this.props.stock.symbol;
-
-        // if (obj.hasOwnProperty(symbol)) {
-        //     obj[obj[symbol]]++;
-        // }
-        // else {
-        //    obj[symbol] = 1; 
-        // }
-
-
-
-        
-
-
-
-        const {stocks, loading} = this.props.stocks;
-
-        console.log('stocks',stocks)
-        let stockContent;
-        
-        if(stocks === null || loading){
-            stockContent = <Spinner />;
+        if(transactions === null || loading){
+            transactionContent = <Spinner />;
         }
         else{
-            stockContent = <StocksList stocks={stocks} />;
-            
-            {   
-                let obj = {};
 
-                stocks.forEach(function (obj) {
-                    Object.keys(obj).forEach(function (k) {
-                        if(k === 'symbol') {
-                            let symbol = obj[k];
-                            console.log('symbol Var', symbol)
-                           console.log(k, obj[k]); // show key and value
-                           console.log(obj.hasOwnProperty(symbol))
-                           if(obj.hasOwnProperty(symbol)) {
-                            obj[obj[symbol]]++;
-                           } 
-                           else {
-                            obj[symbol] = 1;
-                           }
-                        }
-                        
-                    });
-                });
-                console.log('my obj', obj);
-
-
-
-                // stocks.forEach(function (o) {
-                //     Object.keys(o).forEach(function (k) {
-                //         if(k.symbol) {}
-                //        obj[k]sole.log(k, o[k]); // show key and value
-                //     });
-                // });
-
-
-                // stocks.forEach(function (o) {
-                //     let currentObj = Object.keys(o);
-                //     currentObj.forEach(function(ele) {
-
-
-                //            console.log(ele, currentObj[o])
-                            
-
-                //         // console.log('should symbol : ',ele);
-                //     })
-
-
-                //     // Object.keys(o).forEach(function (k) {
-                //     //     // console.log(k, o[k]); // show key and value
-                //     //     // if(k.symbol) {
-                //     //         console.log(k);
-                //     //     // }
-                //     // });
-                // });
-
-
-// stocks.forEach(function (o) {
-//     Object.keys(o).forEach(function (k) {
-//         console.log(k, o[k]); // show key and value
-//     });
-// });
-
-
-// let symbol = k.symbol;
-//                         console.log('symbol',symbol)
-//                         if (obj.hasOwnProperty(symbol)) {
-//                             obj[obj[symbol]] +1;
-//                         }
-//                         else {
-//                             obj[symbol] = 1; 
-//                         }
-
-
-                // for(let i=0; i< stocks.length; i++) {
-                //     let symbol = stocks.symbol;
-                //     console.log('stocks',stocks.symbol)
-
-                //     if (obj.hasOwnProperty(symbol)) {
-                //     obj[obj[symbol]] +1;
-                //     }
-                //     else {
-                //     obj[symbol] = 1; 
-                //     }
-
-                // }
-                
-                // console.log('result obj',obj)
+            console.log('this.props.transactions', this.props.transactions)
+            for(var t of transactions) {
+                if(!dictionary.hasOwnProperty(t.symbol)) {
+                    dictionary[t.symbol] = t
+                    dictionary[t.symbol] = t
+                }
+                else {
+                    dictionary[t.symbol].price += t.price;
+                    dictionary[t.symbol].quantity += t.quantity;
+                }
             }
 
+            
+            for(var key of Object.keys(dictionary)) {
+                if(key.length === 1) {
+                    result.push(dictionary[key])
+                }
+            }
+
+            transactionContent = <StocksList stocks={result} />;
         }
         
         return(
             <div>
                 <h1>Your Stocks</h1>
-                {stockContent}
+                {transactionContent}
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    stocks: state.stocks,
+    transactions: state.transactions,
     auth: state.auth
 });
 
-export default connect(mapStateToProps, {getStocks})(Stocks);
+export default connect(mapStateToProps, {getTransactions})(Stocks);
