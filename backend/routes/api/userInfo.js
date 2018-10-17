@@ -10,6 +10,7 @@ const validateLoginInput = require('../../validation/login');
 
 const User = require('../../models/User');
 
+
 router.post('/register', (req, res) => {
     const {errors, isValid} = validateRegisterInput(req.body);
     
@@ -43,6 +44,8 @@ router.post('/register', (req, res) => {
             }
         });
 });
+
+
 
 router.post('/login', (req, res) => {
     const {errors, isValid} = validateLoginInput(req.body);
@@ -84,12 +87,14 @@ router.post('/login', (req, res) => {
         });
 });
 
+
 router.get('/:id', passport.authenticate('jwt', {session: false}), (req, res) => {
     User.findById(req.params.id)
         .then(user => res.json(user))
         .catch(err =>
             res.status(404).json({error: err}));
 });
+
 
 router.post('/buy/:id', passport.authenticate('jwt', {session: false}),(req, res) => {
     const userFields = {};
@@ -104,5 +109,6 @@ router.post('/buy/:id', passport.authenticate('jwt', {session: false}),(req, res
         })
         .catch(err => res.status(404).json({error: err}));
 });
+
 
 module.exports = router;

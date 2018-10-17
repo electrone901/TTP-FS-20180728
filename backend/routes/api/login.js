@@ -9,7 +9,7 @@ const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
 // @route   POST api/login
-router.post('/login', (req, res) => {
+router.post('/', (req, res) => {
     const {errors, isValid} = validateLoginInput(req.body);
     const email = req.body.email;
     const password = req.body.password;

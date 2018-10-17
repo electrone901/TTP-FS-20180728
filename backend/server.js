@@ -38,13 +38,18 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 // Use routes
-app.use('/api', userInfo);
-app.use('/api', login);
-app.use('/api', portfolio);
-app.use('/api', signup);
+app.use('/api/users', userInfo);
 app.use('/api/transactions', transactions);
-app.use('/api', companies);
+app.use('/api', portfolio);
 app.use('/api/stocks', stocks);
+app.use('/api', companies);
+
+// app.use('/api', login);
+
+// app.use('/api', signup);
+
+
+
 
 // process.env.PORT for Heroku, port 5000 for local
 const port = process.env.PORT || 5000;
