@@ -10,12 +10,14 @@ export default function(state = initialState, action){
                 ...state,
                 loading: true
             };
+
         case 'GET_TRANSACTIONS':
             return{
                 ...state,
                 transactions: action.payload,
                 loading: false
             };
+
         default:
             return state;
     }

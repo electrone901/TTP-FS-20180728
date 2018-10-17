@@ -1,5 +1,4 @@
 import axios from '../axios-stocks';
-
 import { GET_TRANSACTIONS, TRANSACTION_LOADING, GET_ERRORS } from './types';
 
 export const getTransactions = (id) => dispatch => {
@@ -18,6 +17,10 @@ export const getTransactions = (id) => dispatch => {
             })
         );
 };
+
+
+
+
 
 export const addTransaction = (transactionData, history) => dispatch => {
     axios

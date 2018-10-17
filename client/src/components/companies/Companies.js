@@ -153,6 +153,8 @@ change = (e) =>{
         }
       })
 
+      console.log('choosen_type_str', choosen_type_str)
+
       request({
       	"method":"GET", 
       	"uri": "https://api.iextrading.com/1.0/tops?symbols="+choosen_type_str,

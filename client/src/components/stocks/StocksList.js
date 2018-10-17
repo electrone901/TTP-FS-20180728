@@ -15,8 +15,8 @@ import StocksItem from './StocksItem';
 		            </tr>
 	            </thead>
 	            <tbody>
-	            	{
-	            		 stocks.map(stock => <StocksItem key={stock._id} stock={stock} />)
+	            	{	
+	            		stocks ? stocks.map(stock => <StocksItem key={stock._id} stock={stock} />) : <h1>Loading</h1>
 	            	}
 	            </tbody>
 	    	</table>

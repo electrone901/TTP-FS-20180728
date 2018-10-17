@@ -1,6 +1,7 @@
 const initialState = {
     stocks: null,
-    loading: false
+    loading: false,
+    stockPrice: null
 };
 
 export default function(state = initialState, action){
@@ -16,6 +17,14 @@ export default function(state = initialState, action){
                 stocks: action.payload,
                 loading: false
             };
+
+        case 'GET_STOCKPRICE':
+            return{
+                ...state,
+                stockPrice: action.payload,
+                loading: false
+            };
+
         default:
             return state;
     }
