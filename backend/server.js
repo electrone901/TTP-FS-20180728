@@ -33,7 +33,7 @@ app.use(function (req, res, next) {
 app.use(passport.initialize());
 require('./config/passport')(passport);
 
-app.get('/', (req, res) => res.send('Hello, you are on the root directory!'));
+app.get('/', (req, res) => res.send('Luis, you are on the root directory!'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
